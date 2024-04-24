@@ -9,9 +9,10 @@ function adicionaDadosAluno(){
       nome: nome,
       ra: ra,
       email: email
-  };
+    };
     alunos.push(aluno);
     adicionarLinha(aluno);
+    limparCampos();
 }
 
 function excluirlinha(botao){
@@ -39,4 +40,10 @@ function adicionarLinha(aluno){
 
 function json(){
     return JSON.stringify(alunos);
+}
+
+function limparCampos(){
+  document.getElementById('input_nome').value = "";
+  document.getElementById('input_ra').value = "";
+  document.getElementById('input_email').value = "";
 }
