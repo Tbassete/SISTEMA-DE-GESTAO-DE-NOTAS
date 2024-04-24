@@ -7,3 +7,8 @@ function adicionaDadosAluno(){
     const aluno = new Aluno(nome, ra, email);
     alunos.push(aluno);
 }
+
+function excluirlinha(botao){
+let linha = botao.parentNode.parentNode;     //<button onclick="excluirLinha(this)">Excluir</button>
+  linha.parentNode.removeChild(linha); 
+}
