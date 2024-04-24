@@ -16,7 +16,7 @@ function adicionaDadosAluno(){
 }
 
 function excluirlinha(botao){
-let linha = botao.parentNode.parentNode;     //<button onclick="excluirLinha(this)">Excluir</button>
+let linha = botao.parentNode.parentNode;     //<button onclick="excluirlinha(this)">Excluir</button>
   linha.parentNode.removeChild(linha); 
 }
 
