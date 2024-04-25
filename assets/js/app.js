@@ -1,7 +1,7 @@
 //let alunos = [];
 
 
-var idFormulario = document.getElementById("idFormulario");
+let idFormulario = document.getElementById("idFormulario");
 
 idFormulario.addEventListener("submit", (e) => {
     e.preventDefault();
