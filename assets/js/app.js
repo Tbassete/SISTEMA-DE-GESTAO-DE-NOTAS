@@ -58,8 +58,7 @@ function exibirTabelaAlunos() {
             <td>${aluno.prova_integrada2 || '-'}</td>
             <td>${aluno.media2Bimestre || '-'}</td>
             <td>${aluno.mediaFinal || '-'}</td>
-            <td>${aluno.situacao || '-'}</td>
-        `;
+            <td>${aluno.situacao || '-'}</td> `; // <td><button onclick="excluirAluno('${aluno.ra}', this)">Excluir</button></td>
 
         tabela.appendChild(novaLinha);
     });
@@ -153,15 +152,51 @@ function adicionarLinha(aluno) {
     document.getElementById('idTabela').appendChild(novaLinha);
 }
 
+// function adicionarLinha(aluno) {
+//     let novaLinha = document.createElement('tr');
+
+//     let nome = document.createElement('td');
+//     nome.innerHTML = aluno.nome;
+//     novaLinha.appendChild(nome);
+
+//     let RA = document.createElement('td');
+//     RA.innerHTML = aluno.ra;
+//     novaLinha.appendChild(RA);
+
+//     let Email = document.createElement('td');
+//     Email.innerHTML = aluno.email;
+//     novaLinha.appendChild(Email);
+
+//     let botaoExcluir = document.createElement('button');
+//     botaoExcluir.textContent = 'Excluir';
+//     botaoExcluir.onclick = function() {
+//         excluirAluno(aluno.ra, this); 
+//         novaLinha.remove(); 
+//     };
+//     let colunaBotao = document.createElement('td');
+//     colunaBotao.appendChild(botaoExcluir);
+//     novaLinha.appendChild(colunaBotao);
+
+//     document.getElementById('idTabela').appendChild(novaLinha);
+// }
+
+// function excluirAluno(ra, botao) {
+//     let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+//     alunos = alunos.filter(aluno => aluno.ra !== ra);
+//     localStorage.setItem('aluno', JSON.stringify(alunos));
+    
+//     let linha = botao.parentNode.parentNode;
+//     linha.remove();
+// }
+
+
+
+
+
 function limparCampos() {
     document.getElementById('input_nome').value = "";
     document.getElementById('input_ra').value = "";
     document.getElementById('input_email').value = "";
-}
-
-function excluirlinha(botao) {
-    let linha = botao.parentNode.parentNode;     //<button onclick="excluirLinha(this)">Excluir</button>
-    linha.parentNode.removeChild(linha);
 }
 
 function limparCampos() {
