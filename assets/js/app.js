@@ -33,8 +33,12 @@ function adicionaDadosAluno() {
     limparCampos();
 }
 
-function exibirTabelaAlunos() {
 
+//essa variavel esta atrelada a função "exibirTabelaAlunos()"
+let tabelaExibida = false;
+
+function exibirTabelaAlunos() {
+    if(!tabelaExibida){
     const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
 
 
@@ -51,7 +55,6 @@ function exibirTabelaAlunos() {
             <td>${aluno.email}</td>
             <td>${aluno.prova1}</td>
             <td>${aluno.prova_integrada1}</td>
-            <!-- Adicione outras células conforme necessário -->
             <td>${aluno.media1Bimestre || '-'}</td>
             <td>${aluno.prova2 || '-'}</td>
             <td>${aluno.aep2 || '-'}</td>
@@ -62,6 +65,9 @@ function exibirTabelaAlunos() {
 
         tabela.appendChild(novaLinha);
     });
+
+    tabelaExibida = true;
+}
 }
 
 function adicionarLinha(aluno) {
@@ -83,7 +89,10 @@ function adicionarLinha(aluno) {
 }
 
 function editarDados() {
-
+    let prova1 = document.createElement('td');
+    prova1.innerHTML = "<input type=number id=input_prova_1 name=prova1 min=0 max=8 step=0.01>";
+   
+//"<input type=number id=input_prova_1 name=prova1 min=0 max=8 step=0.01>"
 }
 
 function adicionarLinha(aluno) {
@@ -102,7 +111,7 @@ function adicionarLinha(aluno) {
     novaLinha.appendChild(Email);
 
     let prova1 = document.createElement('td');
-    prova1.innerHTML = "prova1";
+    prova1.innerHTML = " ";
     novaLinha.appendChild(prova1);
 
     let aep1 = document.createElement('td');
@@ -144,9 +153,8 @@ function adicionarLinha(aluno) {
     let acoes = document.createElement('td');
     acoes.innerHTML = `
       <button>Nota</button>
-      <button>Editar</button>
-      <button onclick="excluirlinha()">Remover</button>
-  `;
+      <button onclick="editarDados()">Editar</button>
+      <button onclick="excluirlinha()">Remover</button>`;
     novaLinha.appendChild(acoes);
 
     document.getElementById('idTabela').appendChild(novaLinha);
@@ -199,11 +207,6 @@ function limparCampos() {
     document.getElementById('input_email').value = "";
 }
 
-function limparCampos() {
-    document.getElementById('input_nome').value = "";
-    document.getElementById('input_ra').value = "";
-    document.getElementById('input_email').value = "";
-}
 
 // function adicionaNota1B() {
 
