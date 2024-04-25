@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="icon" href="assests/icon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="\SISTEMA-DE-GESTAO-DE-NOTAS\assests/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="\SISTEMA-DE-GESTAO-DE-NOTAS\assets\css\style.css">
     <title>Gestão de Notas</title>
 </head>
 <body>
@@ -51,9 +51,32 @@
                         <input type="number" id="input_aep_2" name="aep2">
                     </div>
                     <div>
-                        <button type="submit" value="Adicionar" onclick="adicionaDadosAluno()">Adicionar</button>
+                        <button type="button" value="Adicionar" onclick="adicionaDadosAluno()">Adicionar</button>
                     </div>
                 </form>
+                <table id="idTabela">
+                    <colgroup>
+                        <col span="13" style="background-color:#F5F5F5">
+                    </colgroup>
+                    <tr id="idCabecalhoTabela">
+                        <th>Nome</th>
+                        <th>RA</th>
+                        <th>Email</th>
+                        <th>Prova 1</th>
+                        <th>AEP 1</th>
+                        <th>Prova Integrada 1</th>
+                        <th>Média 1º Bimestre</th>
+                        <th>Prova 2</th>
+                        <th>AEP 2</th>
+                        <th>Prova Integrada 2</th>
+                        <th>Média 2º Bimestre</th>
+                        <th>Média Final</th>
+                        <th>Situação</th>
+                    </tr>
+                    <tr 
+                        id="idNomeTabela">
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
