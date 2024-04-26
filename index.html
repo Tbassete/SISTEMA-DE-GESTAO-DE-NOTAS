@@ -44,51 +44,112 @@
                 </form>
             </div>
         </div>
+        <div id="popupNotas" class="popupNotas">
+            <div class="Cadastro">
+                <h1>Cadastro De Notas</h1>
+            </div>
+            <div class="formulario" id="idFormulario">
+                <form>
+                    <div class="notasBimestre">
+                        <div>
+                            <div>
+                                <span class="spanNotas" for="nome">Prova 1:</span>
+                                <input class="Notas" type="number" id="input_prova_1" name="Prova 1 " max="10.0" min="0" step="0.1" disabled>
+                            </div>
+                            <div>
+                                <span class="spanNotas" for="input_ra">AEP 1:</span>
+                                <input class="Notas" type="number" id="input_aep_1" name="AEP" max="10.0" min="0" step="0.1" disabled>
+                            </div>
+                            <div>
+                                <span class="spanNotas" for="input_email">Prova Integrada 1 :</span>
+                                <input class="Notas" type="number" id="input_prova_integrada_1" name="Prova Integrada 1" max="10.0" min="0" step="0.1" disabled>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <span class="spanNotas" for="nome">Prova 2:</span>
+                                <input class="Notas" type="number" id="input_prova_2" name="Prova 2 " max="10.0" min="0" step="0.1" disabled>
+                            </div>
+                            <div>
+                                <span class="spanNotas" for="input_ra">AEP 2:</span>
+                                <input class="Notas" type="number" id="input_aep_2" name="AEP" max="10.0" min="0" step="0.1" disabled>
+                            </div>
+                            <div>
+                                <span class="spanNotas" for="input_email">Prova Integrada 2:</span>
+                                <input class="Notas" type="number" id="input_prova_integrada_2" name="Prova Integrada 2" max="10.0" min="0" step="0.1" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="switchBimestre">
+                        <label for="switchBimestre" id="primeiroBimestre" class="bimestreLabel">Primeiro Bimestre</label>
+                        <label class="switch">
+                            <input type="checkbox" id="switchBimestre" class="switch" onchange="alternarBimestre()">
+                            <span class="slider round"></span>
+                        </label>
+                        <label for="switchBimestre" id="segundoBimestre" class="bimestreLabel">Segundo Bimestre</label>
+                    </div>
+                    <div class="rodape">
+                        <div>
+                            <button class="botao" type="submit" value="AdicionarNotas" id="salvar"
+                                onclick="adicionaDadosAluno()">Adicionar</button>
+                        </div>
+                        <div>
+                            <button class="botao" id="cancelarNotas">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     <div class="botoesControle">
         <button id="openPopup" class="botaoSite" onclick="configurarPopup();">Adicionar aluno</button>
         <button id="openSalvar" class="botaoSalvar" >ver função</button>
-         <!-- para aparecer esse botão quando começar a editar a tabela -->
-    </div class="tabela-com-scroll"> 
-          <table id="idTabela" class="tabela">
-            <thead>
-                <tr id="idCabecalhoTabela" class="cabecalho-tabela">
-                    <th><h1>Nome</h1></th>
-                    <th><h1>RA</h1></th>
-                    <th><h1>Email</h1></th>
-                    <th><h1>Prova 1</h1></th>
-                    <th><h1>AEP 1</h1></th>
-                    <th><h1>Prova Integrada1</h1></th>
-                    <th><h1>Média 1º Bimestre</h1></th>
-                    <th><h1>Prova 2</h1></th>
-                    <th><h1>AEP 2</h1></th>
-                    <th><h1>Prova Integrada2</h1></th>
-                    <th><h1>Média 2º Bimestre</h1></th>
-                    <th><h1>Média Final</h1></th>
-                    <th><h1>Situação</h1></th>
-                    <th><h1 class="acoes">ações</h1></th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr id="idMediasTabela">
-                    <th><h1></h1></th>
-                    <th><h1></h1></th>
-                    <th>MEDIAS</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th>-</th>
-                    <th><h1></h1></th>
-                    <th><h1></h1></th>
-                </tr>
-            </tfoot>
-        </table>
+                <!-- para aparecer esse botão quando começar a editar a tabela -->
     </div>
+        <div class="fora-wrapper">
+            <div class="tabela-wrapper">
+                <table id="idTabela" class="tabela">
+                    <thead>
+                        <tr id="idCabecalhoTabela" class="cabecalho-tabela">
+                            <th><h1>Nome</h1></th>
+                            <th><h1>RA</h1></th>
+                            <th><h1>Email</h1></th>
+                            <th><h1>Prova 1</h1></th>
+                            <th><h1>AEP 1</h1></th>
+                            <th><h1>Prova Integrada1</h1></th>
+                            <th><h1>Média 1º Bimestre</h1></th>
+                            <th><h1>Prova 2</h1></th>
+                            <th><h1>AEP 2</h1></th>
+                            <th><h1>Prova Integrada2</h1></th>
+                            <th><h1>Média 2º Bimestre</h1></th>
+                            <th><h1>Média Final</h1></th>
+                            <th><h1>Situação</h1></th>
+                            <th><h1 class="acoes">Ações</h1></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr id="idMediasTabela">
+                            <th><h1></h1></th>
+                            <th><h1></h1></th>
+                            <th>MEDIAS</th>
+                            <th id="mediaProva1">-</th>
+                            <th id="mediaAEP1">-</th>
+                            <th id="mediaProvaIntegrada1">-</th>
+                            <th id="media1Bi">-</th>
+                            <th id="mediaProva2">-</th>
+                            <th id="mediaAEP2">-</th>
+                            <th id="mediaProvaIntegrada2">-</th>
+                            <th id="media2Bi">-</th>
+                            <th id="mediaGeral">-</th>
+                            <th><h1></h1></th>
+                            <th><h1></h1></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
     <script src="assets/js/app.js"></script>
 </body>
 
