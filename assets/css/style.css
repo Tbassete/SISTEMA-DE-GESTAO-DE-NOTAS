@@ -1,5 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
+
+
 * {
     margin: 0px;
     padding: 0px;
@@ -222,19 +224,6 @@ h2 a {
     box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td:hover {
-    background-color: #FFF842;
-    color: #403E10;
-    font-weight: bold;
-
-    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
-    transform: translate3d(6px, -6px, 0);
-
-    transition-delay: 0s;
-    transition-duration: 0.4s;
-    transition-property: all;
-    transition-timing-function: line;
-}
 
 .container .limite {
     max-height: 40px;
@@ -246,14 +235,17 @@ h2 a {
     flex-direction: column;
     justify-content: space-around;
     height: 90%;
+    padding: 5px;
 }
 
 .container td.actions button {
-    padding: 5px 10px;
+    padding: 2px 3px;
+    margin-bottom: 2px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
+    height: 15px;
 }
 
 .container td.actions button.add {
