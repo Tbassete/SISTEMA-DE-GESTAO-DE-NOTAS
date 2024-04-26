@@ -12,8 +12,15 @@ function adicionaDadosAluno() {
     const ra = document.getElementById("input_ra").value;
     const email = document.getElementById("input_email").value;
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
     if (!nome || !ra || !email) {
         alert("Todos os campos são obrigatórios!");
+        return;
+    }
+
+    if (!emailRegex.test(email)) {
+        alert("O e-mail inserido não está em um formato válido!");
         return;
     }
     // const aluno = new Aluno(nome, ra, email);
@@ -30,7 +37,6 @@ function adicionaDadosAluno() {
     alert("Aluno adicionado com sucesso!");
     alunos.push(aluno);
     adicionarLinha(aluno);
-    limparCampos();
 }
 
 
@@ -215,3 +221,35 @@ function limparCampos() {
 //     const input_aep_1 = document.getElementById("input_aep_1").value;
 
 // }
+
+
+function configurarPopup() {
+    limparCampos();
+    
+    document.getElementById("popup").classList.add("show");
+    setTimeout(function() {
+        document.getElementById("popup").style.display = "block";
+    }, 10);
+
+    document.getElementById("cancelar").addEventListener("click", function() {
+        document.getElementById("popup").classList.remove("show");
+        setTimeout(function() {
+            document.getElementById("popup").style.display = "none";
+        }, 300);
+    });
+
+    document.getElementById("salvar").addEventListener("click", function() {
+        let nome = document.getElementById("input_nome").value;
+        let ra = document.getElementById("input_ra").value;
+        let email = document.getElementById("input_email").value;
+        
+        const aluno = validarCadastro(nome, ra, email);
+        if (aluno) {
+            adicionaDadosAluno();
+            document.getElementById("popup").classList.remove("show");
+            setTimeout(function() {
+                document.getElementById("popup").style.display = "none";
+            }, 300);
+        }
+    });
+}
