@@ -28,10 +28,6 @@ body{
     width: auto;
 }
 
-.conteudo {
-    border-radius: 15px;
-    box-shadow: 3px 3px 3px 3px rgba(58, 58, 61, 0.39);
-}
 
 .Cadastro{
     display: flex;
@@ -143,6 +139,10 @@ body{
     outline: none; 
 }
 
+.cabecalho-tabela{
+    height: 40px;
+}
+
 h1 {
     font-size: 3em;
     font-weight: 300;
@@ -176,48 +176,66 @@ h2 a {
     color: #FFF842;
 }
 
-.container th h1 {
+.tabela-wrapper {
+
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: fit-content;
+    max-height: 66.4vh;
+    
+    margin-top: 22px;
+    
+    margin: 15px;
+    padding-bottom: 20px;
+    
+}
+
+
+.tabela th h1 {
     font-weight: bold;
     font-size: 1em;
     text-align: center;
     color: #185875;
 }
 
-.container td {
+.tabela td {
     font-weight: normal;
     font-size: 1em;
-    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-    -moz-box-shadow: 0 2px 2px -2px #0E1119;
-    box-shadow: 0 2px 2px -2px #0E1119;
     padding: 1px; 
-    width: 100px; 
     height: 10px; 
 }
 
-.container {
+.tabela {
     text-align: center;
-    overflow: hidden;
     display: table;
-    width: 100%; 
+    table-layout: fixed;
+    margin: 30px;
+    width: auto;
+    height: calc(100% -30px);;
 }
 
-.container tr:nth-child(odd) {
+.tabela-com-scroll {
+    max-width: 100%;
+    overflow-x: auto; 
+}
+
+.tabela tr:nth-child(odd) {
     background-color: #323C50;
 }
 
-.container tr:nth-child(even) {
+.tabela tr:nth-child(even) {
     background-color: #2C3446;
 }
 
-.container th {
+.tabela th {
     background-color: #1F2739;
 }
 
-.container td:first-child {
+.tabela td:first-child {
     color: #FB667A;
 }
 
-.container tr:hover {
+.tabela tr:hover {
     background-color: #464A52;
     -webkit-box-shadow: 0 6px 6px -6px #0E1119;
     -moz-box-shadow: 0 6px 6px -6px #0E1119;
@@ -225,12 +243,7 @@ h2 a {
 }
 
 
-.container .limite {
-    max-height: 40px;
-    overflow: hidden;
-}
-
-.container td.actions {
+.tabela td.actions {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -238,7 +251,7 @@ h2 a {
     padding: 5px;
 }
 
-.container td.actions button {
+.tabela td.actions button {
     padding: 2px 3px;
     margin-bottom: 2px;
     border: none;
@@ -248,34 +261,48 @@ h2 a {
     height: 15px;
 }
 
-.container td.actions button.add {
+.tabela td.actions button.add {
     background-color: #4DC3FA;
     color: white;
     transition: background-color 0.3s ease;
 }
 
-.container td.actions button.add:hover {
+.tabela td.actions button.add:hover {
     background-color: #36a0d1;
 }
 
-.container td.actions button.update {
+.tabela td.actions button.update {
     background-color: #28A745;
     color: white;
     transition: background-color 0.3s ease;
 }
 
-.container td.actions button.update:hover {
+.tabela td.actions button.update:hover {
     background-color: #1e7e36;
 }
 
-.container td.actions button.delete {
+.tabela td.actions button.delete {
     background-color: #FB667A;
     color: white;
     transition: background-color 0.3s ease;
 }
 
-.container td.actions button.delete:hover {
+.tabela td.actions button.delete:hover {
     background-color: #d64558;
+}
+
+#idCabecalhoTabela,
+#idMediasTabela {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Cor de fundo para que a linha fixa seja visível */
+    z-index: 2; /* Garante que a linha fixa esteja acima das outras linhas */
+}
+
+#idMediasTabela {
+    position: sticky;
+    bottom: 0;
+    color: rgba(255, 255, 255, 0.748);
 }
 
 .botao{
@@ -336,5 +363,5 @@ h2 a {
 }
 
 .botoesControle{
-    margin: 50px;
+    margin: 30px;
 }
