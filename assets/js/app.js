@@ -87,7 +87,7 @@ function adicionarLinha(aluno) {
     celulaAcoes.innerHTML = `
         <button class="add">Adicionar Notas</button>
         <button class="update" onclick="editarDados('${idLinha}')">Editar</button>
-        <button class="delete" onclick="excluirlinha()">Remover</button>
+        <button class="delete" onclick="excluirLinha('${aluno.ra}')">Excluir</button>
     `;
     novaLinha.appendChild(celulaAcoes);
 
@@ -122,7 +122,7 @@ function exibirTabelaAlunos() {
             <td class="actions">
                 <button class="add">Adicionar Notas</button>
                 <button class="update" onclick="editarDados('${idLinha}')">Editar</button>
-                <button class="delete">Excluir</button>
+                <button class="delete" onclick="excluirLinha('${aluno.ra}')">Excluir</button>
             </td>
         `;
         tabela.appendChild(novaLinha);
@@ -130,7 +130,6 @@ function exibirTabelaAlunos() {
 
     // tabelaExibida = true;
 }
-
 
 function editarDados(idLinha) {
     let linha = document.getElementById(idLinha);
@@ -147,6 +146,21 @@ function editarDados(idLinha) {
         linha.cells[0].innerHTML = novoNome;
         linha.cells[1].innerHTML = novoRA;
         linha.cells[2].innerHTML = novoEmail;
+    }
+}
+
+function excluirLinha(ra) {
+    let tabela = document.getElementById('idTabela');
+    let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+
+    let index = alunos.findIndex(aluno => aluno.ra === ra);
+
+    if (index !== -1) {
+        alunos.splice(index, 1);
+
+        localStorage.setItem('aluno', JSON.stringify(alunos));
+
+        tabela.deleteRow(index + 1);
     }
 }
 
