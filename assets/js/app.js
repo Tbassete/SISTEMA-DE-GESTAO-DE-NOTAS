@@ -169,22 +169,20 @@ function editarDados(botaoEditar) {
     }
 
 
-
-
-function excluirLinha(ra) {
-    let tabela = document.getElementById('idTabela');
-    let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
-
-    let index = alunos.findIndex(aluno => aluno.ra === ra);
-
-    if (index !== -1) {
-        alunos.splice(index, 1);
-
-        localStorage.setItem('aluno', JSON.stringify(alunos));
-
-        tabela.deleteRow(index + 1);
+    function excluirLinha(ra) {
+        let tabela = document.getElementById('idTabela');
+        let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    
+        let index = alunos.findIndex(aluno => aluno.ra === ra);
+    
+        if (index !== -1) {
+            alunos.splice(index, 1);
+    
+            localStorage.setItem('aluno', JSON.stringify(alunos));
+    
+            tabela.deleteRow(index + 1);
+        }
     }
-}
 
 function configurarPopup() {
     limparCampos();
@@ -215,7 +213,41 @@ function configurarPopup() {
             }, 300);
         }
     });
+    configurarPopupNotas()
 }
+
+function configurarPopupNotas() {
+    limparCampos();
+
+    document.getElementById("popupNotas").classList.add("show");
+    setTimeout(function () {
+        document.getElementById("popupNotas").style.display = "block";
+    }, 10);
+
+    document.getElementById("cancelar").addEventListener("click", function () {
+        document.getElementById("popupNotas").classList.remove("show");
+        setTimeout(function () {
+            document.getElementById("popupNotas").style.display = "none";
+        }, 300);
+    });
+
+    document.getElementById("salvar").addEventListener("click", function () {
+        let nome = document.getElementById("input_nome").value;
+        let ra = document.getElementById("input_ra").value;
+        let email = document.getElementById("input_email").value;
+
+        const aluno = validarCadastro(nome, ra, email);
+        if (aluno) {
+            adicionaDadosAluno();
+            document.getElementById("popupNotas").classList.remove("show");
+            setTimeout(function () {
+                document.getElementById("popupNotas").style.display = "none";
+            }, 300);
+        }
+    });
+}
+
+
 
 function limparCampos() {
     document.getElementById('input_nome').value = "";
@@ -451,4 +483,30 @@ function calcularMediaTotalFinal() {
     } else {
         console.log("Não há notas válidas de alunos registradas.");
     }
+}
+
+function alternarBimestre() {
+    const switchCheckbox = document.getElementById("switchBimestre");
+    const primeiroBimestreLabel = document.getElementById("primeiroBimestre");
+    const segundoBimestreLabel = document.getElementById("segundoBimestre");
+
+    if (switchCheckbox.checked) {
+        primeiroBimestreLabel.classList.remove("selecionado");
+        segundoBimestreLabel.classList.add("selecionado");
+        document.getElementById("input_prova_2").disabled = false;
+        document.getElementById("input_aep_2").disabled = false;
+        document.getElementById("input_prova_integrada_2").disabled = false;
+        document.getElementById("input_prova_1").disabled = true;
+        document.getElementById("input_aep_1").disabled = true;
+        document.getElementById("input_prova_integrada_1").disabled = true;
+    } else {
+        primeiroBimestreLabel.classList.add("selecionado");
+        segundoBimestreLabel.classList.remove("selecionado");
+        document.getElementById("input_prova_1").disabled = false;
+        document.getElementById("input_aep_1").disabled = false;
+        document.getElementById("input_prova_integrada_1").disabled = false;
+        document.getElementById("input_prova_2").disabled = true;
+        document.getElementById("input_aep_2").disabled = true;
+        document.getElementById("input_prova_integrada_2").disabled = true;
+    } 
 }
