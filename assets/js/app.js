@@ -37,6 +37,7 @@ function adicionaDadosAluno() {
     alert("Aluno adicionado com sucesso!");
     alunos.push(aluno);
     adicionarLinha(aluno);
+    limparCampos();
 }
 
 
@@ -94,15 +95,11 @@ function adicionarLinha(aluno) {
     document.getElementById('idTabela').appendChild(novaLinha);
 }
 
-function editarDados() {
-    let prova1 = document.createElement('td');
-    prova1.innerHTML = "<input type=number id=input_prova_1 name=prova1 min=0 max=8 step=0.01>";
-   
-//"<input type=number id=input_prova_1 name=prova1 min=0 max=8 step=0.01>"
-}
-
 function adicionarLinha(aluno) {
+    let idLinha = 'linha' + Date.now();
+
     let novaLinha = document.createElement('tr');
+    novaLinha.id = idLinha;
 
     let nome = document.createElement('td');
     nome.innerHTML = aluno.nome;
@@ -159,12 +156,32 @@ function adicionarLinha(aluno) {
     let acoes = document.createElement('td');
     acoes.innerHTML = `
       <button>Nota</button>
-      <button onclick="editarDados()">Editar</button>
+      <button onclick="editarDados('${idLinha}')">Editar</button>
       <button onclick="excluirlinha()">Remover</button>`;
     novaLinha.appendChild(acoes);
 
     document.getElementById('idTabela').appendChild(novaLinha);
 }
+
+function editarDados(idLinha) {
+    let linha = document.getElementById(idLinha);
+
+    let nome = linha.cells[0].innerHTML;
+    let RA = linha.cells[1].innerHTML;
+    let Email = linha.cells[2].innerHTML;
+
+    let novoNome = prompt("Novo Nome:", nome);
+    let novoRA = prompt("Novo RA:", RA);
+    let novoEmail = prompt("Novo Email:", Email);
+
+    if (novoNome !== null && novoRA !== null && novoEmail !== null) {
+        linha.cells[0].innerHTML = novoNome;
+        linha.cells[1].innerHTML = novoRA;
+        linha.cells[2].innerHTML = novoEmail;
+    }
+}
+
+
 
 // function adicionarLinha(aluno) {
 //     let novaLinha = document.createElement('tr');
@@ -202,9 +219,6 @@ function adicionarLinha(aluno) {
 //     let linha = botao.parentNode.parentNode;
 //     linha.remove();
 // }
-
-
-
 
 
 function limparCampos() {
