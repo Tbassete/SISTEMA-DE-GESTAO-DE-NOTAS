@@ -176,26 +176,11 @@ h2 a {
     color: #FFF842;
 }
 
-.tabela-wrapper {
-
-    overflow-y: scroll;
-    overflow-x: scroll;
-    height: fit-content;
-    max-height: 66.4vh;
-    
-    margin-top: 22px;
-    
-    margin: 15px;
-    padding-bottom: 20px;
-    
-}
-
-
 .tabela th h1 {
     font-weight: bold;
     font-size: 1em;
     text-align: center;
-    color: #185875;
+    color: #75b1cc;
 }
 
 .tabela td {
@@ -208,15 +193,17 @@ h2 a {
 .tabela {
     text-align: center;
     display: table;
-    table-layout: fixed;
-    margin: 30px;
-    width: auto;
-    height: calc(100% -30px);;
+    width: 100%;
 }
 
-.tabela-com-scroll {
-    max-width: 100%;
-    overflow-x: auto; 
+.fora-wrapper {
+    width: auto;
+    margin: 30px;
+}
+
+.tabela-wrapper {
+    overflow-y: scroll;
+    max-height: calc(100vh - 220px);
 }
 
 .tabela tr:nth-child(odd) {
@@ -241,7 +228,6 @@ h2 a {
     -moz-box-shadow: 0 6px 6px -6px #0E1119;
     box-shadow: 0 6px 6px -6px #0E1119;
 }
-
 
 .tabela td.actions {
     display: flex;
