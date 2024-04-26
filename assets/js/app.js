@@ -86,7 +86,7 @@ function adicionarLinha(aluno) {
     celulaAcoes.classList.add('actions');
     celulaAcoes.innerHTML = `
         <button class="add">Adicionar Notas</button>
-        <button class="update" onclick="editarDados('${idLinha}')">Editar</button>
+        <button class="update" onclick="editarDados(this)">Editar</button>
         <button class="delete" onclick="excluirLinha('${aluno.ra}')">Excluir</button>
     `;
     novaLinha.appendChild(celulaAcoes);
@@ -121,7 +121,7 @@ function exibirTabelaAlunos() {
             <td>${aluno.situacao || '-'}</td>
             <td class="actions">
                 <button class="add">Adicionar Notas</button>
-                <button class="update" onclick="editarDados('${idLinha}')">Editar</button>
+                <button class="update" onclick="editarDados(this)">Editar</button>
                 <button class="delete" onclick="excluirLinha('${aluno.ra}')">Excluir</button>
             </td>
         `;
@@ -131,8 +131,8 @@ function exibirTabelaAlunos() {
     // tabelaExibida = true;
 }
 
-function editarDados(idLinha) {
-    let linha = document.getElementById(idLinha);
+function editarDados(botaoEditar) {
+    let linha = botaoEditar.parentNode.parentNode;
 
     let nome = linha.cells[0].innerHTML;
     let RA = linha.cells[1].innerHTML;
@@ -142,12 +142,34 @@ function editarDados(idLinha) {
     let novoRA = prompt("Novo RA:", RA);
     let novoEmail = prompt("Novo Email:", Email);
 
-    if (novoNome !== null && novoRA !== null && novoEmail !== null) {
+        if (novoNome == "" || novoRA == "" || novoEmail == ""){
+        alert("Os campos devem estar preenchidos.");
+        return;
+        } 
+        if (!/^[a-zA-Z]+$/.test(novoNome)) {
+            alert("O nome deve conter apenas letras.");
+            return;
+        }
+        // Validar o novoRA
+        if (!/^\d+$/.test(novoRA)) {
+            alert("O RA deve conter apenas números.");
+            return;
+        }
+
+        // Validar o novoEmail
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(novoEmail)) {
+            alert("O email inserido não está em um formato válido.");
+            return;
+        }
+
+        // Se todos os campos passaram na validação, atualizar as células da linha
         linha.cells[0].innerHTML = novoNome;
         linha.cells[1].innerHTML = novoRA;
         linha.cells[2].innerHTML = novoEmail;
     }
-}
+
+
+
 
 function excluirLinha(ra) {
     let tabela = document.getElementById('idTabela');
