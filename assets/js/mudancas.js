@@ -1,7 +1,8 @@
+//let alunos = [];
+
 // função para exibir a tabela de alunos sozinho
 exibirTabelaAlunos();
-
-
+atualizarMediasNaTabela();
 
 let idFormulario = document.getElementById("idFormulario");
 
@@ -9,19 +10,23 @@ idFormulario.addEventListener("submit", (e) => {
     e.preventDefault();
 })
 
-//essa variavel esta atrelada a função "exibirTabelaAlunos()"
-let tabelaExibida = false;
-
 function adicionaDadosAluno() {
     const nome = document.getElementById("input_nome").value;
     const ra = document.getElementById("input_ra").value;
     const email = document.getElementById("input_email").value;
+
+    // Expressão regular para validar o formato de e-mail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
     if (!nome || !ra || !email) {
         alert("Todos os campos são obrigatórios!");
         return;
     }
 
+    if (!emailRegex.test(email)) {
+        alert("O e-mail inserido não está em um formato válido!");
+        return;
+    }
     // const aluno = new Aluno(nome, ra, email);
     const aluno = {
         nome: nome,
@@ -36,11 +41,11 @@ function adicionaDadosAluno() {
     alert("Aluno adicionado com sucesso!");
     alunos.push(aluno);
     adicionarLinha(aluno);
-    document.getElementById("popup").classList.remove("show");
-    // limparCampos();  //ja é implementado na função configurarPopup
 }
 
 
+//essa variavel esta atrelada a função "exibirTabelaAlunos()"
+let tabelaExibida = false;
 
 function exibirTabelaAlunos() {
     const tabela = document.getElementById('idTabela');
@@ -111,18 +116,251 @@ function adicionarLinha(aluno) {
     document.getElementById('idTabela').appendChild(novaLinha);
 }
 
+function editarDados(idLinha) {
+    let linha = document.getElementById(idLinha);
+
+    let nome = linha.cells[0].innerHTML;
+    let RA = linha.cells[1].innerHTML;
+    let Email = linha.cells[2].innerHTML;
+
+    let novoNome = prompt("Novo Nome:", nome);
+    let novoRA = prompt("Novo RA:", RA);
+    let novoEmail = prompt("Novo Email:", Email);
+
+    if (novoNome !== null && novoRA !== null && novoEmail !== null) {
+        linha.cells[0].innerHTML = novoNome;
+        linha.cells[1].innerHTML = novoRA;
+        linha.cells[2].innerHTML = novoEmail;
+    }
+}
+
+function definirSituacao(aluno){
+    let media = calcularMediaFinal(aluno);
+    if (media >= 6.0){
+        return "Aprovado";
+    }
+    else if (media <= 3.0){
+        return "Reprovado";
+    }
+    else{
+        return "Recuperacao";
+    }
+}
+
+function calcularMedia1Total() {
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalProva1 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(calcularMedia1(aluno)); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalProva1 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalProva1 / numAlunos;
+       console.log(`A média total do 1º Bimestre é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalProva1(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalProva1 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(aluno.prova1); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalProva1 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalProva1 / numAlunos;
+       console.log(`A média total das notas da Prova 1 é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalAEP1(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalAEP1 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(aluno.aep1); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalAEP1 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalAEP1 / numAlunos;
+       console.log(`A média total das notas da AEP 1 é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalIntegrada1(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalIntegrada1 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(aluno.prova_integrada1); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalIntegrada1 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalIntegrada1 / numAlunos;
+       console.log(`A média total das notas da Prova Integrada 1 é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMedia2Total() {
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalProva2 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(calcularMedia2(aluno)); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalProva2 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalProva2 / numAlunos;
+       console.log(`A média total do 2º Bimestre é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalProva2(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalProva2 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(aluno.prova2); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalProva2 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalProva2 / numAlunos;
+       console.log(`A média total das notas da Prova 2 é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalAEP2(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalAEP2 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(aluno.aep2); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalAEP2 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalAEP2 / numAlunos;
+       console.log(`A média total das notas da AEP 2 é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalIntegrada2(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalIntegrada2 = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(aluno.prova_integrada2); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalIntegrada2 += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalIntegrada2 / numAlunos;
+       console.log(`A média total das notas da Prova Integrada 2 é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function calcularMediaTotalFinal(){
+    const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let totalFinal = 0;
+    let numAlunos = 0;
+
+    alunos.forEach(aluno => {
+        const nota = parseFloat(calcularMediaFinal(aluno)); // Convertendo para float
+        if (!isNaN(nota) && nota >= 0 && nota <= 10) { // Verifica se a nota é um número válido entre 0 e 10
+            totalFinal += nota;
+            numAlunos++;
+        }
+    });
+
+    if (numAlunos > 0) {
+        const mediaTotal = totalFinal / numAlunos;
+       console.log(`A média Final da turma é: ${mediaTotal.toFixed(2)}`);
+    } else {
+        console.log("Não há notas válidas de alunos registradas.");
+    }
+}
+
+function atualizarMediasNaTabela() {
+    document.getElementById('mediaProva1').textContent = calcularMediaTotalProva1();
+    document.getElementById('mediaAEP1').textContent = calcularMediaTotalAEP1();
+    document.getElementById('mediaProvaIntegrada1').textContent = calcularMediaTotalIntegrada1();
+    document.getElementById('media1Bi').textContent = calcularMedia1Total();
+    document.getElementById('mediaProva2').textContent = calcularMediaTotalProva2();
+    document.getElementById('mediaAEP2').textContent = calcularMediaTotalAEP2();
+    document.getElementById('mediaProvaIntegrada2').textContent = calcularMediaTotalIntegrada2();
+    document.getElementById('media2Bi').textContent = calcularMedia2Total();
+    document.getElementById('mediaGeral').textContent = calcularMediaTotalFinal();
+}
+
+function limparCampos() {
+    document.getElementById('input_nome').value = "";
+    document.getElementById('input_ra').value = "";
+    document.getElementById('input_email').value = "";
+}
 
 function configurarPopup() {
-    document.getElementById("openPopup").addEventListener("click", function() {
-        document.getElementById("input_nome").value = "";
-        document.getElementById("input_ra").value = "";
-        document.getElementById("input_email").value = "";
-
-        document.getElementById("popup").classList.add("show");
-        setTimeout(function() {
-            document.getElementById("popup").style.display = "block";
-        }, 10);
-    });
+    limparCampos();
+    
+    document.getElementById("popup").classList.add("show");
+    setTimeout(function() {
+        document.getElementById("popup").style.display = "block";
+    }, 10);
 
     document.getElementById("cancelar").addEventListener("click", function() {
         document.getElementById("popup").classList.remove("show");
@@ -135,20 +373,14 @@ function configurarPopup() {
         let nome = document.getElementById("input_nome").value;
         let ra = document.getElementById("input_ra").value;
         let email = document.getElementById("input_email").value;
-
-        // Expressão regular para validar o formato de e-mail
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (nome.trim() === '' || ra.trim() === '' || email.trim() === '') {
-            alert("Todos os campos são obrigatórios!");
-            return;
-        }
-
-        if (!emailRegex.test(email)) {
-            alert("O e-mail inserido não está em um formato válido!");
-            return;
-        }
         
-        adicionaDadosAluno();
+        const aluno = validarCadastro(nome, ra, email);
+        if (aluno) {
+            adicionaDadosAluno();
+            document.getElementById("popup").classList.remove("show");
+            setTimeout(function() {
+                document.getElementById("popup").style.display = "none";
+            }, 300);
+        }
     });
 }
