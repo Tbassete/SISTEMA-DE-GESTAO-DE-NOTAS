@@ -4,7 +4,7 @@ import {calcularMediaTotalFinal, calcularMediaTotalIntegrada2,
     calcularMediaTotalAEP2,calcularMediaTotalProva2,
     calcularMedia2Total, calcularMediaTotalIntegrada1,
     calcularMediaTotalProva1, calcularMedia1Total,
-    calcularMedia1, calcularMedia2, calcularMediaFinal} from "./Calculos.js"
+    calculaMedia1b, calculaMedia2b, calcularMediaFinal} from "./Calculos.js"
 import { validaRA } from "./Validacao_de-ERRO.js";
 
 exibirTabelaAlunos();
@@ -79,13 +79,12 @@ export function configurarPopup() {
         let ra = document.getElementById("input_ra").value;
         const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
         if(!validaRA(ra, alunos)){
-        adicionaDadosAluno()
-        exibirTabelaAlunos();}
+        adicionaDadosAluno()}
         else{
             alert("Cadastro existente")
         }
     });
-    configurarPopupNotas(); 
+     
 }
 
 function encontrarJSONPorRA(ra, alunos){
@@ -135,6 +134,10 @@ function configurarPopupNotas() {
         }, 300);
     });
 
+    document.getElementById('switchBimestre').addEventListener('change', ()=>{
+        alternarBimestre();
+    })
+
     document.getElementById("salvar1").addEventListener("click", function () {
 
         let ra = document.getElementById("input_ra").value;
@@ -157,30 +160,6 @@ function limparCampos() {
     document.getElementById('input_ra').value = "";
     document.getElementById('input_email').value = "";
     
-}
-
-
-// Cálculos de média
-
-function calculaMedia1b(prova1, prova_Integrada1, aep1){
-    prova1 = parseFloat(prova1) * 0.8 ;
-    prova_Integrada1 =parseFloat(prova_Integrada1) * 0.1 ;
-    aep1 = parseFloat(aep1) * 0.1 ;
-  
-    return prova1 + prova_Integrada1 + aep1;
-    
-  }
-
-function calculaMedia2b(prova2, prova_integrada2, aep2) {
-    prova2 = parseFloat(prova2) * 0.8;
-    prova_integrada2 = parseFloat(prova_integrada2) * 0.1;
-    aep2 = parseFloat(aep2) * 0.1;
-
-    return prova2 + aep2 + prova_integrada2;
-}
-
-function calcularMediaFinal(aluno) {
-    return(calculaMedia1b(aluno) + calculaMedia2b(aluno)) / 2;     
 }
 
 function definirSituacao(aluno) {

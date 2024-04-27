@@ -189,27 +189,23 @@ export function calcularMedia1Total() {
     }
 }
 
-export function calcularMedia1(aluno) {
-    let prova = aluno.prova1 * 0.8;
-    let aep = aluno.aep1 * 0.1;
-    let integrada = aluno.prova_integrada1 * 0.1;
+export function calculaMedia1b(prova1, prova_Integrada1, aep1){
+    prova1 = parseFloat(prova1) * 0.8 ;
+    prova_Integrada1 =parseFloat(prova_Integrada1) * 0.1 ;
+    aep1 = parseFloat(aep1) * 0.1 ;
+  
+    return prova1 + prova_Integrada1 + aep1;
+    
+  }
 
-    let media = prova + aep + integrada;
+export function calculaMedia2b(prova2, prova_integrada2, aep2) {
+    prova2 = parseFloat(prova2) * 0.8;
+    prova_integrada2 = parseFloat(prova_integrada2) * 0.1;
+    aep2 = parseFloat(aep2) * 0.1;
 
-    return media;
-}
-
-export function calcularMedia2(aluno) {
-    let prova = aluno.prova2 * 0.8;
-    let aep = aluno.aep2 * 0.1;
-    let integrada = aluno.prova_integrada2 * 0.1;
-
-    let media = prova + aep + integrada;
-
-    return media;
+    return prova2 + aep2 + prova_integrada2;
 }
 
 export function calcularMediaFinal(aluno) {
-    let final = (calcularMedia1(aluno) + calcularMedia2(aluno)) / 2;
-    return final;
+    return(calculaMedia1b(aluno) + calculaMedia2b(aluno)) / 2;     
 }
