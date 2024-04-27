@@ -1,5 +1,4 @@
-import {excluirLinha, editarDados, adicionarCelula, adicionaDadosAluno,
-    adicionarLinha} from "./Funcoes_de_dados.js";
+
 
 export function calcularMediaTotalFinal() {
     const alunos = JSON.parse(localStorage.getItem('aluno')) || [];

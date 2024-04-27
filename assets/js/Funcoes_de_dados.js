@@ -123,20 +123,21 @@ export function editarDados(botaoEditar) {
     }
 
 
-export function excluirLinha(ra) {
-        let tabela = document.getElementById('idTabela');
+    export function excluirLinha(ra) {
+        const tabela = document.getElementById('idTabela');
         let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
     
-        let index = alunos.findIndex(aluno => aluno.ra === ra);
+        const index = alunos.findIndex(aluno => aluno.ra === ra);
     
         if (index !== -1) {
             alunos.splice(index, 1);
     
             localStorage.setItem('aluno', JSON.stringify(alunos));
     
-            tabela.deleteRow(index + 1);
-        }
-    }
+            // Remover a linha da tabela
+            tabela.deleteRow(index + 1); 
+        }}
+    
 
 export function alternarBimestre() {
         const switchCheckbox = document.getElementById("switchBimestre");

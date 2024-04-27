@@ -7,17 +7,27 @@ import {calcularMediaTotalFinal, calcularMediaTotalIntegrada2,
     calcularMedia1, calcularMedia2, calcularMediaFinal} from "./Calculos.js"
 import { validaRA } from "./Validacao_de-ERRO.js";
 
+exibirTabelaAlunos();
+
 document.getElementById("openPopup").addEventListener('click', ()=>{
     configurarPopup();
 })
-exibirTabelaAlunos();
+
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete')) {
+        const linhaASerExcluida = event.target.closest('tr');
+        const ra = linhaASerExcluida.querySelector('td:nth-child(2)').textContent.trim();
+        excluirLinha(ra);
+    }
+});
+
+
 
 function exibirTabelaAlunos() {
     const tabela = document.getElementById('idTabela');
     const alunos = JSON.parse(localStorage.getItem('aluno')) || [];
 
     alunos.forEach(aluno => {
-        let controll;
         let idLinha = 'linha' + Date.now();
         let novaLinha = document.createElement('tr');
         novaLinha.id = idLinha;
@@ -38,16 +48,13 @@ function exibirTabelaAlunos() {
             <td class="actions">
                 <button class="add">Adicionar Notas</button>
                 <button class="update" onclick="editarDados(this)">Editar</button>
-                <button class="delete" onclick="excluirLinha('${aluno.ra}')">Excluir</button>
+                <button class="delete" id="Excluir">Excluir</button>
             </td>
         `;
         tabela.appendChild(novaLinha);
-        controll++;
-        if (controll>alunos.length){
-            return;
-        }
     });
 }
+
 
 export function configurarPopup() {
     limparCampos();
