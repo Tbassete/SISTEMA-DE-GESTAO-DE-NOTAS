@@ -89,6 +89,7 @@ export function editarDados(botaoEditar) {
     let linha = botaoEditar.parentNode.parentNode;
 
     let nome = linha.cells[0].innerHTML;
+    let RA = linha.cells[1].innerHTML;
     let Email = linha.cells[2].innerHTML;
 
     let novoNome = prompt("Novo Nome:", nome);
