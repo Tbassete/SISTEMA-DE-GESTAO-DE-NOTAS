@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="switchBimestre">
-                        <label for="switchBimestre" id="primeiroBimestre" class="bimestreLabel" checked>Primeiro Bimestre</label>
+                        <label for="switchBimestre" id="primeiroBimestre" class="bimestreLabel">Primeiro Bimestre</label>
                         <label class="switch">
                             <input type="checkbox" id="switchBimestre" class="switch" onchange="alternarBimestre()">
                             <span class="slider round"></span>
@@ -91,7 +91,7 @@
                     <div class="rodape">
                         <div>
                             <button class="botao" type="submit" value="AdicionarNotas" id="salvarNotas"
-                                onclick="adicionaDadosAluno()">Adicionar</button>
+                                onclick="adicionarNotasAluno()">Adicionar</button>
                         </div>
                         <div>
                             <button class="botao" id="cancelarNotas">Cancelar</button>
@@ -100,72 +100,11 @@
                 </form>
             </div>
         </div>
-        <!-- popup para edição da tabela -->
-        <div id="popupTabela" class="popupTabela">
-            <div class="Cadastro">
-                <h1>Edição Da Tabela</h1>
-            </div>
-            <div class="formulario" id="idFormulario">
-                <form>
-                    <div class="placeholder">
-                        <input type="text" id="input_nome" name="nome" >
-                        <span for="nome">Nome:</span>
-                    </div>
-                    <div class="placeholder">
-                        <input type="number" id="input_ra" name="ra" >
-                        <span for="input_ra">RA:</span>
-                    </div>
-                    <div class="placeholder">
-                        <input type="email" id="input_email" name="email" >
-                        <span for="input_email">Email:</span>
-                    </div>
-                    <div class="notasBimestreEditar">
-                        <div class="divNotasEditar">
-                            <div>
-                                <span class="spanNotasEditar" for="nome">Prova 1:</span>
-                                <input class="NotasEditar" type="number" id="input_prova_1" name="Prova 1 " max="10.0" min="0" step="0.1">
-                            </div>
-                            <div>
-                                <span class="spanNotasEditar" for="input_ra">AEP 1:</span>
-                                <input class="NotasEditar" type="number" id="input_aep_1" name="AEP" max="10.0" min="0" step="0.1">
-                            </div>
-                            <div>
-                                <span class="spanNotasEditar" for="input_email">Prova Integrada 1 :</span>
-                                <input class="NotasEditar" type="number" id="input_prova_integrada_1" name="Prova Integrada 1" max="10.0" min="0" step="0.1">
-                            </div>
-                        </div>
-                        <div class="divNotasEditar">
-                            <div>
-                                <span class="spanNotasEditar" for="nome">Prova 2:</span>
-                                <input class="NotasEditar" type="number" id="input_prova_2" name="Prova 2 " max="10.0" min="0" step="0.1">
-                            </div>
-                            <div>
-                                <span class="spanNotasEditar" for="input_ra">AEP 2:</span>
-                                <input class="NotasEditar" type="number" id="input_aep_2" name="AEP" max="10.0" min="0" step="0.1">
-                            </div>
-                            <div>
-                                <span class="spanNotasEditar" for="input_email">Prova Integrada 2:</span>
-                                <input class="NotasEditar" type="number" id="input_prova_integrada_2" name="Prova Integrada 2" max="10.0" min="0" step="0.1">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rodape">
-                        <div>
-                            <button class="botao" type="button" value="salvar" id="salvarEditar"
-                                onclick="adicionaDadosAluno()">Salvar</button>
-                        </div>
-                        <div>
-                            <button class="botao" id="cancelar">Cancelar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="botoesControle">
-            <button id="openPopup" class="botaoSite" onclick="configurarPopup();">Adicionar aluno</button>
-            <button id="openSalvar" class="botaoSalvar" >ver função</button>
-                    <!-- para aparecer esse botão quando começar a editar a tabela -->
-        </div>
+    <div class="botoesControle">
+        <button id="openPopup" class="botaoSite" onclick="configurarPopup();">Adicionar aluno</button>
+        <button id="openSalvar" class="botaoSalvar" >ver função</button>
+                <!-- para aparecer esse botão quando começar a editar a tabela -->
+    </div>
         <div class="fora-wrapper">
             <div class="tabela-wrapper">
                 <table id="idTabela" class="tabela">
@@ -209,11 +148,9 @@
                 </table>
             </div>
         </div>
+
+
     <script src="assets/js/app.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            alternarBimestre();
-        });
-    </script>
 </body>
+
 </html>
