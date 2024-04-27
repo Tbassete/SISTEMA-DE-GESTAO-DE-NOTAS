@@ -89,14 +89,12 @@ export function editarDados(botaoEditar) {
     let linha = botaoEditar.parentNode.parentNode;
 
     let nome = linha.cells[0].innerHTML;
-    let RA = linha.cells[1].innerHTML;
     let Email = linha.cells[2].innerHTML;
 
     let novoNome = prompt("Novo Nome:", nome);
-    let novoRA = prompt("Novo RA:", RA);
     let novoEmail = prompt("Novo Email:", Email);
 
-        if (novoNome == "" || novoRA == "" || novoEmail == ""){
+        if (novoNome == "" || novoEmail == ""){
         alert("Os campos devem estar preenchidos.");
         return;
         } 
@@ -104,12 +102,6 @@ export function editarDados(botaoEditar) {
             alert("O nome deve conter apenas letras.");
             return;
         }
-        // Validar o novoRA
-        if (!/^\d+$/.test(novoRA)) {
-            alert("O RA deve conter apenas números.");
-            return;
-        }
-
         // Validar o novoEmail
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(novoEmail)) {
             alert("O email inserido não está em um formato válido.");
@@ -118,9 +110,15 @@ export function editarDados(botaoEditar) {
 
         // Se todos os campos passaram na validação, atualizar as células da linha
         linha.cells[0].innerHTML = novoNome;
-        linha.cells[1].innerHTML = novoRA;
         linha.cells[2].innerHTML = novoEmail;
-    }
+
+        let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+        const index = alunos.findIndex(aluno => aluno.ra === RA);
+        if (index !== -1) {
+            alunos[index].nome = novoNome;
+            alunos[index].email = novoEmail;
+            localStorage.setItem('aluno', JSON.stringify(alunos));
+    }}
 
 
     export function excluirLinha(ra) {

@@ -21,7 +21,11 @@ document.addEventListener('click', (event) => {
     }
 });
 
-
+document.addEventListener("click", (event)=>{
+    if(event.target.classList.contains('update')){
+        editarDados(event.target)
+    }
+})
 
 function exibirTabelaAlunos() {
     const tabela = document.getElementById('idTabela');
@@ -47,8 +51,8 @@ function exibirTabelaAlunos() {
             <td>${aluno.situacao || '-'}</td>
             <td class="actions">
                 <button class="add">Adicionar Notas</button>
-                <button class="update" onclick="editarDados(this)">Editar</button>
-                <button class="delete" id="Excluir">Excluir</button>
+                <button class="update" >Editar</button>
+                <button class="delete" >Excluir</button>
             </td>
         `;
         tabela.appendChild(novaLinha);
