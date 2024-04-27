@@ -41,7 +41,7 @@ function exibirTabelaAlunos() {
             <td>${aluno.email || '-'}</td>
             <td>${aluno.prova1 || '-'}</td>
             <td>${aluno.aep1 || '-'}</td>
-            <td>${aluno.prova_integrada1 || '-'}</td>
+            <td>${aluno.prova_Integrada1 || '-'}</td>
             <td>${aluno.media1 || '-'}</td>
             <td>${aluno.prova2 || '-'}</td>
             <td>${aluno.aep2 || '-'}</td>
@@ -85,9 +85,42 @@ export function configurarPopup() {
             alert("Cadastro existente")
         }
     });
+    configurarPopupNotas(); 
 }
 
-export function configurarPopupNotas() {
+function encontrarJSONPorRA(ra, alunos){
+
+    //let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    for (let i = 0; i < alunos.length; i++) {
+      if (alunos[i].ra === ra) {
+          return alunos[i];
+      }
+  }
+  return null;}
+
+function adicionaNotaPorRA(ra, prova1, prova_Integrada1, aep1, prova2, aep2, prova_integrada2){
+    let alunos = JSON.parse(localStorage.getItem('aluno')) || [];
+    let alunoEncontrado  = encontrarJSONPorRA(ra, alunos);
+    
+    if(alunoEncontrado){
+      alunoEncontrado.prova1 = prova1;
+      alunoEncontrado.prova_Integrada1 = prova_Integrada1;
+      alunoEncontrado.aep1 = aep1;
+      alunoEncontrado.media1 = calculaMedia1b(prova1, prova_Integrada1, aep1);
+      alunoEncontrado.aep2 = aep2;
+      alunoEncontrado.prova2 = prova2;
+      alunoEncontrado.prova_integrada2 = prova_integrada2;
+      alunoEncontrado.media2 = calculaMedia2b(prova2, prova_integrada2, aep2);
+      alunoEncontrado.mediaFinal = calcularMediaFinal(alunoEncontrado);
+      localStorage.setItem('aluno', JSON.stringify(alunos));
+    }
+    else{
+      alert("nenhum aluno encontrado");
+    }
+    
+  }
+  
+function configurarPopupNotas() {
     limparCampos();
 
     document.getElementById("popupNotas").classList.add("show");
@@ -101,12 +134,53 @@ export function configurarPopupNotas() {
             document.getElementById("popupNotas").style.display = "none";
         }, 300);
     });
+
+    document.getElementById("salvar1").addEventListener("click", function () {
+
+        let ra = document.getElementById("input_ra").value;
+        //let nome = document.getElementById("input_nome").value;
+       // let email = document.getElementById("input_email").value;
+        let prova1 = document.getElementById("input_prova_1").value;
+        let prova_Integrada1 = document.getElementById("input_prova_integrada_1").value;
+        let aep1 = document.getElementById("input_aep_1").value;
+        let prova2 = document.getElementById("input_prova_2").value;
+        let prova_integrada2 = document.getElementById("input_prova_integrada_2").value;
+        let aep2 = document.getElementById("input_aep_2").value;
+         
+        adicionaNotaPorRA(ra, prova1, prova_Integrada1, aep1, prova2, aep2, prova_integrada2);
+        
+    });
 }
 
 function limparCampos() {
     document.getElementById('input_nome').value = "";
     document.getElementById('input_ra').value = "";
     document.getElementById('input_email').value = "";
+    
+}
+
+
+// Cálculos de média
+
+function calculaMedia1b(prova1, prova_Integrada1, aep1){
+    prova1 = parseFloat(prova1) * 0.8 ;
+    prova_Integrada1 =parseFloat(prova_Integrada1) * 0.1 ;
+    aep1 = parseFloat(aep1) * 0.1 ;
+  
+    return prova1 + prova_Integrada1 + aep1;
+    
+  }
+
+function calculaMedia2b(prova2, prova_integrada2, aep2) {
+    prova2 = parseFloat(prova2) * 0.8;
+    prova_integrada2 = parseFloat(prova_integrada2) * 0.1;
+    aep2 = parseFloat(aep2) * 0.1;
+
+    return prova2 + aep2 + prova_integrada2;
+}
+
+function calcularMediaFinal(aluno) {
+    return(calculaMedia1b(aluno) + calculaMedia2b(aluno)) / 2;     
 }
 
 function definirSituacao(aluno) {
