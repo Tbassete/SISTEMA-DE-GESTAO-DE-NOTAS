@@ -68,7 +68,7 @@ body{
 }
 
 .popup {
-    display: none; /* Inicialmente oculto */
+    display: none; 
     position: fixed;
     top: 50%;
     left: 50%;
@@ -85,10 +85,10 @@ body{
 }
 
 .popupNotas {
-
+    display: none; 
     position: fixed;
     top: 50%;
-    left: 15%;
+    left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 15px;
     z-index: 9998;
@@ -100,6 +100,24 @@ body{
 .popupNotas.show {
     opacity: 1; 
 }
+
+
+.popupTabela{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    z-index: 9997;
+    box-shadow: 5px 5px 5px 5px rgba(58, 58, 61, 0.39);
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+.popupTabela.show {
+    opacity: 1; 
+}
+
 
 .placeholder{
     position: relative;
@@ -369,6 +387,28 @@ h2 a {
     margin: 30px;
 }
 
+.divNotasEditar{
+    margin-bottom: 15px;
+}
+
+.notasBimestreEditar{
+    display: flex;
+    justify-content:space-between
+}
+
+.NotasEditar{
+    display: flex;
+    background-color: #B2E6E2;
+    border: none;
+    border-radius: 5px;
+    width: 320px;
+}
+
+.spanNotasEditar{
+    color: #173b58;
+    font-weight: 500;
+}
+
 .notasBimestre{
     display: flex;
     justify-content: space-around;
@@ -382,13 +422,13 @@ h2 a {
     width: 250px;
 }
 
-input:disabled {
-    background: #76797571;
-  }
-
 .spanNotas{
     color: #173b58;
     font-weight: 500;
+}
+
+input:disabled {
+    background: #76797571;
 }
 
 .bimestreLabel{
@@ -409,8 +449,8 @@ input:disabled {
 }
 
 .selecionado {
-    color: #173b58; /* Cor do texto quando selecionado */
-    opacity: 0.7; /* Opacidade do texto quando selecionado */
+    color: #173b58; 
+    opacity: 0.7;
 }
 
 .switch {
