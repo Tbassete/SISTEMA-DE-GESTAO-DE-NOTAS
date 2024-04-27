@@ -10,6 +10,7 @@ import { validaRA } from "./Validacao_de-ERRO.js";
 document.getElementById("openPopup").addEventListener('click', ()=>{
     configurarPopup();
 })
+exibirTabelaAlunos();
 
 function exibirTabelaAlunos() {
     const tabela = document.getElementById('idTabela');
